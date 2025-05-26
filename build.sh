@@ -1,24 +1,26 @@
 #!/bin/bash
-# Basic build script for CPUSpeedManager
+# Build script for CPUSpeedManager using CMake
 
 set -e # Exit immediately if a command exits with a non-zero status.
 
-# Prefer qmake6 if available, otherwise use qmake (for Qt5)
-QMAKE_CMD="qmake"
-if command -v qmake6 &> /dev/null; then
-    QMAKE_CMD="qmake6"
-elif ! command -v qmake &> /dev/null; then
-    echo "Error: Neither qmake6 nor qmake found in PATH. Please install Qt development tools."
-    exit 1
-fi
+# Create a build directory
+echo "Creating build directory..."
+mkdir -p build
+cd build
 
-echo "Using $(command -v $QMAKE_CMD) (version: $($QMAKE_CMD -v))"
+# Run CMake to configure the project
+echo "Configuring project with CMake..."
+cmake ..
 
-$QMAKE_CMD CPUSpeedManager.pro
-make
+# Run the build tool to compile the project
+echo "Building project..."
+cmake --build .
+
+# Navigate back to the root directory
+cd ..
 
 echo ""
 echo "Build complete."
-echo "Executable is ./CPUSpeedManager"
-echo "To install (example): sudo make install (if defined in .pro) or sudo cp CPUSpeedManager /usr/local/bin/"
+echo "Executable is ./build/CPUSpeedManager"
+echo "To install, you might need to add an install target to CMakeLists.txt and then run: cd build && sudo cmake --build . --target install"
 echo "To make it available in menus, copy cpuspeedmanager.desktop to ~/.local/share/applications/ or /usr/share/applications/"
