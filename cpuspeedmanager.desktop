@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=CPU Speed Manager
+GenericName=CPU Utility
+Comment=Manage CPU frequency and core activity
+Exec=CPUSpeedManager 
+Icon=utilities-system-monitor
+Terminal=false
+Type=Application
+Categories=System;Settings;Utility;
+Keywords=cpu;frequency;core;speed;performance;governor;
